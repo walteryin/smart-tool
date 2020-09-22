@@ -58,7 +58,7 @@ public class ${model}Controller extends BaseController {
 			${_model} = new ${model}();
 		}
 		else {
-			${_model} = ${_model}Service.selectById(id);
+			${_model} = ${_model}Service.get(id);
 		}
 		model.addAttribute("${_model}", ${_model});
 		return "<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${_model}Edit";
@@ -68,7 +68,7 @@ public class ${model}Controller extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
     public Result get(@ValidateParam(name = "id", value = {Validator.NOT_BLANK}) Integer id) {
-	    return Result.createSuccess(${_model}Service.selectById(id));
+	    return Result.createSuccess(${_model}Service.get(id));
     }
 
 	@ApiOperation("保存")
@@ -85,7 +85,7 @@ public class ${model}Controller extends BaseController {
 			${_model} = new ${model}();
 		}
 		else {
-			${_model} = ${_model}Service.selectById(id);
+			${_model} = ${_model}Service.get(id);
 		}
 		<#list fieldList as field>
 		${_model}.set${field.upperFieldName}(${field.fieldName});
