@@ -51,10 +51,10 @@ public class Generator extends BaseFrame {
 		this.controllerText.setText(getPackageName() + "controller" + adminString + moduleString
 				+ (analyzer != null ? "/" + analyzer.getModelName() + "Controller.java" : ""));
 
-	    this.listText.setText(getViewBasePath() + adminString + moduleString
-	        + (analyzer != null ? "/" + analyzer.getLowerModelName() + ".jsp" : ""));
-	    this.editText.setText(getViewBasePath()  + adminString + moduleString
-	        + (analyzer != null ? "/" + analyzer.getLowerModelName() + "Edit.jsp" : ""));
+//	    this.listText.setText(getViewBasePath() + adminString + moduleString
+//	        + (analyzer != null ? "/" + analyzer.getLowerModelName() + ".jsp" : ""));
+//	    this.editText.setText(getViewBasePath()  + adminString + moduleString
+//	        + (analyzer != null ? "/" + analyzer.getLowerModelName() + "Edit.jsp" : ""));
 	}
 
 	private String getPackageName() {
@@ -66,9 +66,9 @@ public class Generator extends BaseFrame {
 		return "src/main/java";
 	}
 
-	private String getViewBasePath() {
-		return "src/main/webapp/WEB-INF/view";
-	}
+//	private String getViewBasePath() {
+//		return "src/main/webapp/WEB-INF/view";
+//	}
 
 	@Override
     protected void generateFile(String basePath) {
@@ -172,13 +172,10 @@ public class Generator extends BaseFrame {
 			fieldList.add(dumField);
 		}
 
-		FileUtils
-				.createFile(
-						basePath,
-						controllerText.getText(),
-						new Controller(config.getCompanyName(), projectText.getText(), moduleText.getText(), analyzer
-								.getModelName(), fieldList, analyzer.isContainEnable(), containDate, containDecimal, analyzer
-								.getTableComment(), adminCheckBox.isSelected() ? ADMIN : null).getHtml());
+        FileUtils.createFile(basePath, controllerText.getText(),
+            new Controller(config.getCompanyName(), projectText.getText(), moduleText.getText(),
+                analyzer.getModelName(), analyzer.getMappingName(), fieldList, analyzer.isContainEnable(), containDate,
+                containDecimal, analyzer.getTableComment(), adminCheckBox.isSelected() ? ADMIN : null).getHtml());
 	}
 
 //	private void generateListFile(String basePath) {

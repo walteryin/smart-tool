@@ -76,11 +76,11 @@ public abstract class BaseFrame extends JFrame {
 	private JLabel controllerLabel = null;
 	protected JTextField controllerText = null;
 
-	private JLabel listLabel = null;
-	protected JTextField listText = null;
+//	private JLabel listLabel = null;
+//	protected JTextField listText = null;
 
-	private JLabel editLabel = null;
-	protected JTextField editText = null;
+//	private JLabel editLabel = null;
+//	protected JTextField editText = null;
 
 	private BaseButton generateButton = null;
 
@@ -269,19 +269,19 @@ public abstract class BaseFrame extends JFrame {
             }
         });
 
-		this.listLabel = new JLabel();
-		this.listLabel.setText("列表页(JSP)");
-		this.listLabel.setToolTipText("列表页");
-		this.listLabel.setBounds(new Rectangle(35, 290, 100, 20));
-		this.listText = new JTextField();
-		this.listText.setBounds(new Rectangle(120, 290, 500, 20));
-
-		this.editLabel = new JLabel();
-		this.editLabel.setText("编辑页(JSP)");
-		this.editLabel.setToolTipText("编辑页");
-		this.editLabel.setBounds(new Rectangle(35, 320, 100, 20));
-		this.editText = new JTextField();
-		this.editText.setBounds(new Rectangle(120, 320, 500, 20));
+//		this.listLabel = new JLabel();
+//		this.listLabel.setText("列表页(JSP)");
+//		this.listLabel.setToolTipText("列表页");
+//		this.listLabel.setBounds(new Rectangle(35, 290, 100, 20));
+//		this.listText = new JTextField();
+//		this.listText.setBounds(new Rectangle(120, 290, 500, 20));
+//
+//		this.editLabel = new JLabel();
+//		this.editLabel.setText("编辑页(JSP)");
+//		this.editLabel.setToolTipText("编辑页");
+//		this.editLabel.setBounds(new Rectangle(35, 320, 100, 20));
+//		this.editText = new JTextField();
+//		this.editText.setBounds(new Rectangle(120, 320, 500, 20));
 
 		changeTextValue();
 
@@ -316,10 +316,10 @@ public abstract class BaseFrame extends JFrame {
 		
 		this.panel1.add(this.adminCheckBox);
 		
-		this.panel1.add(this.listLabel);
-		this.panel1.add(this.listText);
-		this.panel1.add(this.editLabel);
-		this.panel1.add(this.editText);
+//		this.panel1.add(this.listLabel);
+//		this.panel1.add(this.listText);
+//		this.panel1.add(this.editLabel);
+//		this.panel1.add(this.editText);
 		
 		this.panel1.add(this.generateButton);
 

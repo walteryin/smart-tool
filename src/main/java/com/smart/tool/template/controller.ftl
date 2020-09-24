@@ -28,7 +28,7 @@ import com.smart.mvc.validator.annotation.ValidateParam;
 
 @Api(tags = "${tableComment}")
 @Controller
-@RequestMapping("<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${_model}")
+@RequestMapping("<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${mapping}")
 @SuppressWarnings("rawtypes")
 public class ${model}Controller extends BaseController {
 
@@ -38,7 +38,7 @@ public class ${model}Controller extends BaseController {
 	@ApiOperation("入口页")
 	@RequestMapping(method = RequestMethod.GET)
 	public String execute() {
-		return "<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${_model}";
+		return "<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${mapping}";
 	}
 	
 	@ApiOperation("列表")
@@ -61,7 +61,7 @@ public class ${model}Controller extends BaseController {
 			${_model} = ${_model}Service.get(id);
 		}
 		model.addAttribute("${_model}", ${_model});
-		return "<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${_model}Edit";
+		return "<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${mapping}_edit";
 	}
 	
 	@ApiOperation("获取")

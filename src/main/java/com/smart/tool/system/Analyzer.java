@@ -39,9 +39,6 @@ public class Analyzer {
 		String[] subNames = tableName.toLowerCase().split("_");
 		StringBuilder sbf = new StringBuilder();
 		for (int i = 1; i < subNames.length; i++) {
-			if (i == 1 && "re".equals(subNames[i])) {
-				continue;
-			}
 			sbf.append(subNames[i].replaceFirst(subNames[i].substring(0, 1), subNames[i].substring(0, 1).toUpperCase()));
 		}
 		modelName = sbf.toString().trim();
@@ -172,38 +169,6 @@ public class Analyzer {
 		}
 	}
 
-	// sql文件解析方式
-	public Analyzer(String content) {
-		String subContent = content.split("create table")[1];
-		tableName = subContent.substring(0, subContent.indexOf('(')).toString().trim();
-
-		String[] subNames = tableName.toLowerCase().split("_");
-		StringBuilder sbf = new StringBuilder();
-		for (int i = 1; i < subNames.length; i++) {
-			if (i == 1 && "re".equals(subNames[i])) {
-				continue;
-			}
-			sbf.append(subNames[i].replaceFirst(subNames[i].substring(0, 1), subNames[i].substring(0, 1).toUpperCase()));
-		}
-		modelName = sbf.toString().trim();
-
-		String property = subContent.substring(subContent.indexOf('(') + 1, subContent.lastIndexOf('('));
-		String[] propertys = property.split(",");
-		fieldList = new ArrayList<DummyField>();
-		for (String pro : propertys) {
-			String[] onePropertys = pro.split("\\s+ ");
-			if (onePropertys.length > 3) {
-				String[] ccs = onePropertys[1].split("_");
-				StringBuilder ccssbf = new StringBuilder(ccs[0]);
-				for (int i = 1; i < ccs.length; i++) {
-					ccssbf.append(ccs[i].replaceFirst(ccs[i].substring(0, 1), ccs[i].substring(0, 1).toUpperCase()));
-				}
-                fieldList.add(new DummyField(ccssbf.toString(), getJavaFieldType(onePropertys[2]),
-                    getJavaFieldFormat(onePropertys[2]), onePropertys[1]));
-			}
-		}
-	}
-	
 	public boolean isContainEnable() {
 		return containEnable;
 	}
@@ -222,6 +187,10 @@ public class Analyzer {
 
 	public String getTableName() {
 		return tableName;
+	}
+	
+	public String getMappingName() {
+        return tableName.substring(tableName.indexOf("_") + 1);
 	}
 
 	public List<DummyField> getFieldList() {

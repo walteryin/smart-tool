@@ -18,7 +18,7 @@ public class Controller {
 
 	private Map<String, Object> dataMap;
 
-    public Controller(String company, String project, String module, String model, List<DummyField> fieldList,
+    public Controller(String company, String project, String module, String model, String mapping, List<DummyField> fieldList,
         boolean containEnable, boolean containDate, boolean containDecimal, String tableComment, String admin) {
 		dataMap = new HashMap<String, Object>();
 		/** 公司 **/
@@ -32,6 +32,8 @@ public class Controller {
 		dataMap.put("model", model);
 		/** 小写开头模型 **/
 		dataMap.put("_model", Generator.getLowerStr(model));
+		/** 映射 **/
+		dataMap.put("mapping", mapping);
 		/** 是否包含启用 **/
 		dataMap.put("containEnable", containEnable);
 		/** 是否包含BigDecimal **/
