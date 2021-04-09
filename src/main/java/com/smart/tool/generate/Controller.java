@@ -20,7 +20,7 @@ public class Controller {
 
     public Controller(String company, String project, String module, String model, String mapping, List<DummyField> fieldList,
         boolean containEnable, boolean containDate, boolean containDecimal, String tableComment, String admin) {
-		dataMap = new HashMap<String, Object>();
+		dataMap = new HashMap<>();
 		/** 公司 **/
 		dataMap.put("company", company);
 		/** 项目 **/

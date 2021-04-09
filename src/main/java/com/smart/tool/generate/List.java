@@ -16,9 +16,9 @@ public class List {
 
 	private Map<String, Object> dataMap;
 
-	public List(String tableComment, String model, boolean containEnable, String enableName,
+	public List(String tableComment, String model, String mapping, boolean containEnable, String enableName,
 			java.util.List<DummyField> fieldList) {
-		dataMap = new HashMap<String, Object>();
+		dataMap = new HashMap<>();
 		/** 公司 **/
 		dataMap.put("path", "${_path}");
 		/** 项目 **/
@@ -27,6 +27,8 @@ public class List {
 		dataMap.put("tableComment", tableComment);
 		/** 小写开头模型 **/
 		dataMap.put("_model", Generator.getLowerStr(model));
+		/** 映射 **/
+		dataMap.put("mapping", mapping);
 		/** 是否包含启用 **/
 		dataMap.put("containEnable", containEnable);
 		/** 是否启用名称 **/
@@ -36,6 +38,6 @@ public class List {
 	}
 	
 	public String getHtml(){
-		return FreemarkerUtils.getText("list.ftl", dataMap);
+		return FreemarkerUtils.getText("list.ftl", dataMap).replace("_&", "$").replaceAll("_@", "#");
 	}
 }

@@ -21,7 +21,8 @@ public class FileUtils {
 		for (int i = 0; i < path.length; i++) {
 			currentPath += "/" + path[i];
 			File f = new File(currentPath);
-			if (currentPath.endsWith(".java") || currentPath.endsWith(".jsp") || currentPath.endsWith(".xml")) {
+			if (currentPath.endsWith(".java") || currentPath.endsWith(".ftl") || currentPath.endsWith(".html")
+					|| currentPath.endsWith(".jsp") || currentPath.endsWith(".xml")) {
 				if (!f.exists()) {
 					f.createNewFile();
 				}

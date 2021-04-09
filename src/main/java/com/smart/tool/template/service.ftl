@@ -10,12 +10,6 @@ import com.smart.mvc.service.Service;
 public interface ${model}Service extends Service<${model}> {
 <#if containEnable>
 
-	/**
-	 * 启用禁用操作
-	 * @param isEnable 是否启用
-	 * @param idList 管理员ID集合
-	 * @return
-	 */
-	public void enable(Integer isEnable, List<Integer> idList);
+	void enable(Integer isEnable, List<Integer> idList);
 </#if>
 }

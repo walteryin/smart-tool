@@ -16,8 +16,8 @@ import com.smart.mvc.service.impl.ServiceImpl;
 public class ${model}ServiceImpl extends ServiceImpl<${model}Dao, ${model}> implements ${model}Service {
 <#if containEnable>
 
+	@Transactional
 	@Override
-	@Transactional(readOnly = false)
 	public void enable(Integer isEnable, List<Integer> idList) {
 		selectByIds(idList).forEach(t -> {
             t.setIsEnable(isEnable);

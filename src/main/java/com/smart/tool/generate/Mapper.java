@@ -50,6 +50,6 @@ public class Mapper {
 	}
 
 	public String getHtml() {
-		return FreemarkerUtils.getText("mapper.ftl", dataMap).replace("_&", "$").replaceAll("&", "#");
+		return FreemarkerUtils.getText("mapper.ftl", dataMap);
 	}
 }

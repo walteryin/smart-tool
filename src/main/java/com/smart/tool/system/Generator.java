@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.smart.tool.generate.Controller;
 import com.smart.tool.generate.Dao;
+import com.smart.tool.generate.Edit;
 import com.smart.tool.generate.Mapper;
 import com.smart.tool.generate.Model;
 import com.smart.tool.generate.Service;
@@ -50,11 +51,21 @@ public class Generator extends BaseFrame {
 		String adminString = (adminCheckBox.isSelected() ? "/" + ADMIN : "");
 		this.controllerText.setText(getPackageName() + "controller" + adminString + moduleString
 				+ (analyzer != null ? "/" + analyzer.getModelName() + "Controller.java" : ""));
-
-//	    this.listText.setText(getViewBasePath() + adminString + moduleString
-//	        + (analyzer != null ? "/" + analyzer.getLowerModelName() + ".jsp" : ""));
-//	    this.editText.setText(getViewBasePath()  + adminString + moduleString
-//	        + (analyzer != null ? "/" + analyzer.getLowerModelName() + "Edit.jsp" : ""));
+		
+		if(htmlCheckBox.isSelected()) {
+			this.listText.setEditable(true);
+			this.listText.setText(getViewBasePath() + adminString + moduleString
+					+ (analyzer != null ? "/" + analyzer.getMappingName() + ".html" : ""));
+			this.editText.setEditable(true);
+			this.editText.setText(getViewBasePath()  + adminString + moduleString
+					+ (analyzer != null ? "/" + analyzer.getMappingName() + "_edit.html" : ""));
+		}
+		else {
+			this.listText.setEditable(false);
+			this.listText.setText(null);
+			this.editText.setEditable(false);
+			this.editText.setText(null);
+		}
 	}
 
 	private String getPackageName() {
@@ -66,9 +77,9 @@ public class Generator extends BaseFrame {
 		return "src/main/java";
 	}
 
-//	private String getViewBasePath() {
-//		return "src/main/webapp/WEB-INF/view";
-//	}
+	private String getViewBasePath() {
+		return "src/main/resources/templates";
+	}
 
 	@Override
     protected void generateFile(String basePath) {
@@ -78,8 +89,8 @@ public class Generator extends BaseFrame {
         generateServiceImplFile(basePath);
         generateDaoFile(basePath);
         generateControllerFile(basePath);
-//        generateListFile(basePath);
-//        generateEditFile(basePath);
+        generateListFile(basePath);
+        generateEditFile(basePath);
     }
 
 	private void generateModelFile(String basePath) {
@@ -178,43 +189,41 @@ public class Generator extends BaseFrame {
                 containDecimal, analyzer.getTableComment(), adminCheckBox.isSelected() ? ADMIN : null).getHtml());
 	}
 
-//	private void generateListFile(String basePath) {
-//		if (StringUtils.isNotBlank(this.listText.getText())) {
-//			List<DummyField> allList = analyzer.getFieldList();
-//			Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
-//			List<DummyField> fieldList = new ArrayList<>();
-//			for (DummyField dumField : allList) {
-//				if (excludeFieldSet.contains(dumField.getFieldName())) {
-//					continue;
-//				}
-//				fieldList.add(dumField);
-//			}
-//
-//			FileUtils.createFile(
-//					basePath,
-//					listText.getText(),
-//					new com.smart.tool.generate.List(analyzer.getTableComment(), analyzer.getModelName(), analyzer
-//							.isContainEnable(), Analyzer.ENABLE_NAME, fieldList).getHtml());
-//		}
-//	}
-//
-//	private void generateEditFile(String basePath) {
-//		if (StringUtils.isNotBlank(this.editText.getText())) {
-//			List<DummyField> allList = analyzer.getFieldList();
-//			Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
-//			List<DummyField> fieldList = new ArrayList<>();
-//			for (DummyField dumField : allList) {
-//				if (excludeFieldSet.contains(dumField.getFieldName())) {
-//					continue;
-//				}
-//				fieldList.add(dumField);
-//			}
-//			FileUtils
-//					.createFile(basePath, editText.getText(),
-//							new Edit(analyzer.getTableComment(), analyzer.getModelName(), analyzer.isContainEnable(),
-//									fieldList).getHtml());
-//		}
-//	}
+	private void generateListFile(String basePath) {
+		if (htmlCheckBox.isSelected() && StringUtils.isNotBlank(this.listText.getText())) {
+			List<DummyField> allList = analyzer.getFieldList();
+			Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
+			List<DummyField> fieldList = new ArrayList<>();
+			for (DummyField dumField : allList) {
+				if (excludeFieldSet.contains(dumField.getFieldName())) {
+					continue;
+				}
+				fieldList.add(dumField);
+			}
+
+			FileUtils.createFile(basePath, listText.getText(),
+					new com.smart.tool.generate.List(analyzer.getTableComment(), analyzer.getModelName(),
+							analyzer.getMappingName(), analyzer.isContainEnable(), Analyzer.ENABLE_NAME, fieldList)
+									.getHtml());
+		}
+	}
+
+	private void generateEditFile(String basePath) {
+		if (htmlCheckBox.isSelected() && StringUtils.isNotBlank(this.editText.getText())) {
+			List<DummyField> allList = analyzer.getFieldList();
+			Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
+			List<DummyField> fieldList = new ArrayList<>();
+			for (DummyField dumField : allList) {
+				if (excludeFieldSet.contains(dumField.getFieldName())) {
+					continue;
+				}
+				fieldList.add(dumField);
+			}
+			FileUtils.createFile(basePath, editText.getText(),
+					new Edit(analyzer.getTableComment(), analyzer.getModelName(), analyzer.getMappingName(),
+							analyzer.isContainEnable(), Analyzer.ENABLE_NAME, fieldList).getHtml());
+		}
+	}
 
 	/**
 	 * 首字母大写
