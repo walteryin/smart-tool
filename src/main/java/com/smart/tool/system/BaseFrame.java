@@ -13,10 +13,6 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.Statement;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -29,6 +25,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileSystemView;
+
+import com.smart.tool.enums.ObjectTypeEnum;
 
 /**
  * 生成器窗口类
@@ -87,8 +85,6 @@ public abstract class BaseFrame extends JFrame {
 
 	// 解析器,包括对sql或者是对数据库表字段解析
 	protected Analyzer analyzer = null;
-	// model继承类配置
-	protected Map<String, Set<String>> persistentMap = null;
 	// 数据库链接
 	protected Connection connection = null;
 	protected Statement statement = null;
@@ -96,19 +92,6 @@ public abstract class BaseFrame extends JFrame {
 	protected DbConfig config = null;
 
 	public BaseFrame() {
-		
-		// 初始化持久对象Map
-		persistentMap = new LinkedHashMap<String, Set<String>>(2);
-		Set<String> set = new HashSet<String>();
-		set.add("id");
-		persistentMap.put("PersistentObject", set);
-		set = new HashSet<String>();
-		set.add("id");
-		set.add("createBy");
-		set.add("createTime");
-		set.add("lastUpdateBy");
-		set.add("lastUpdateTime");
-		persistentMap.put("BasePersistentObject", set);
 
 		// 初始化读取config文件
 		config = new DbConfig();
@@ -216,7 +199,7 @@ public abstract class BaseFrame extends JFrame {
 		this.extendsLabel.setToolTipText("Extends");
 		this.extendsLabel.setBounds(new Rectangle(420, 80, 50, 20));
 
-		this.extendsBox = new JComboBox<Object>(persistentMap.keySet().toArray());
+		this.extendsBox = new JComboBox<Object>(ObjectTypeEnum.getNameList().toArray());
 		this.extendsBox.setBounds(new Rectangle(470, 80, 150, 20));
 
 		this.controllerLabel = new JLabel();

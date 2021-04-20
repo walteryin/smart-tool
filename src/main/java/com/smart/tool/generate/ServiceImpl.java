@@ -16,7 +16,7 @@ public class ServiceImpl {
 
 	private Map<String, Object> dataMap;
 
-	public ServiceImpl(String company, String project, String module, String model, boolean containEnable) {
+	public ServiceImpl(String company, String project, String module, String model, boolean containEnable, String serviceImplName) {
 		dataMap = new HashMap<String, Object>();
 		/** 公司 **/
 		dataMap.put("company", company);
@@ -31,6 +31,8 @@ public class ServiceImpl {
 		dataMap.put("_model", Generator.getLowerStr(model));
 		/** 是否包含启用 **/
 		dataMap.put("containEnable", containEnable);
+		/** 实现类名称 **/
+		dataMap.put("serviceImplName", serviceImplName);
 	}
 	
 	public String getHtml(){

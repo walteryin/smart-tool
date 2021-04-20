@@ -12,7 +12,9 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 </#if>
 import org.springframework.stereotype.Controller;
+<#if containWeb>
 import org.springframework.ui.Model;
+</#if>
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,12 +36,14 @@ public class ${model}Controller extends BaseController {
 
 	@Autowired
 	private ${model}Service ${_model}Service;
+<#if containWeb>
 
 	@ApiOperation("入口页")
 	@RequestMapping(method = RequestMethod.GET)
 	public String execute() {
 		return "<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${mapping}";
 	}
+</#if>
 	
 	@ApiOperation("列表")
 	@ResponseBody
@@ -49,6 +53,7 @@ public class ${model}Controller extends BaseController {
 			@ValidateParam(name = "显示条数", defaultValue = DEFAULT_PAGE_SIZE) Integer pageSize) {
 		return Result.createSuccess(${_model}Service.selectPage(Page.create(pageNo, pageSize)));
 	}
+<#if containWeb>
 
 	@ApiOperation("编辑页")
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -63,6 +68,7 @@ public class ${model}Controller extends BaseController {
 		model.addAttribute("${_model}", ${_model});
 		return "<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${mapping}_edit";
 	}
+</#if>
 	
 	@ApiOperation("获取")
 	@ResponseBody

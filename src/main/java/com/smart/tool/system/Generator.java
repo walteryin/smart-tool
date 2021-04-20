@@ -3,9 +3,10 @@ package com.smart.tool.system;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
+import com.smart.tool.enums.ObjectTypeEnum;
 import com.smart.tool.generate.Controller;
 import com.smart.tool.generate.Dao;
 import com.smart.tool.generate.Edit;
@@ -95,12 +96,12 @@ public class Generator extends BaseFrame {
 
 	private void generateModelFile(String basePath) {
 		List<DummyField> allList = analyzer.getFieldList();
-		Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
+		List<String> excludeFieldList = Arrays.asList(ObjectTypeEnum.getFields(extendsBox.getSelectedItem()));
 		List<DummyField> fieldList = new ArrayList<>();
 		boolean containDate = false;
 		boolean containDecimal = false;
 		for (DummyField dumField : allList) {
-			if (excludeFieldSet.contains(dumField.getFieldName())) {
+			if (excludeFieldList.contains(dumField.getFieldName())) {
 				continue;
 			}
 			if ("Date".equals(dumField.getFieldType())) {
@@ -122,11 +123,11 @@ public class Generator extends BaseFrame {
 
 	private void generateModelXmlFile(String basePath) {
 		List<DummyField> allList = analyzer.getFieldList();
-		Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
+		List<String> excludeFieldList = Arrays.asList(ObjectTypeEnum.getFields(extendsBox.getSelectedItem()));
 		List<DummyField> fieldList = new ArrayList<>();
 		boolean containDate = false;
 		for (DummyField dumField : allList) {
-			if (excludeFieldSet.contains(dumField.getFieldName())) {
+			if (excludeFieldList.contains(dumField.getFieldName())) {
 				continue;
 			}
 			if ("Date".equals(dumField.getFieldType())) {
@@ -152,11 +153,10 @@ public class Generator extends BaseFrame {
 	}
 
 	private void generateServiceImplFile(String basePath) {
-		FileUtils.createFile(
-				basePath,
-				ServiceImplText.getText(),
-				new ServiceImpl(config.getCompanyName(), projectText.getText(), moduleText.getText(), analyzer
-						.getModelName(), analyzer.isContainEnable()).getHtml());
+		FileUtils.createFile(basePath, ServiceImplText.getText(),
+				new ServiceImpl(config.getCompanyName(), projectText.getText(), moduleText.getText(),
+						analyzer.getModelName(), analyzer.isContainEnable(),
+						ObjectTypeEnum.getServiceImplName(extendsBox.getSelectedItem())).getHtml());
 	}
 
 	private void generateDaoFile(String basePath) {
@@ -166,12 +166,12 @@ public class Generator extends BaseFrame {
 
 	private void generateControllerFile(String basePath) {
 		List<DummyField> allList = analyzer.getFieldList();
-		Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
+		List<String> excludeFieldList = Arrays.asList(ObjectTypeEnum.getFields(extendsBox.getSelectedItem()));
 		List<DummyField> fieldList = new ArrayList<DummyField>();
 		boolean containDate = false;
 		boolean containDecimal = false;
 		for (DummyField dumField : allList) {
-			if (excludeFieldSet.contains(dumField.getFieldName())) {
+			if (excludeFieldList.contains(dumField.getFieldName())) {
 				continue;
 			}
 			if ("Date".equals(dumField.getFieldType())) {
@@ -183,19 +183,20 @@ public class Generator extends BaseFrame {
 			fieldList.add(dumField);
 		}
 
-        FileUtils.createFile(basePath, controllerText.getText(),
-            new Controller(config.getCompanyName(), projectText.getText(), moduleText.getText(),
-                analyzer.getModelName(), analyzer.getMappingName(), fieldList, analyzer.isContainEnable(), containDate,
-                containDecimal, analyzer.getTableComment(), adminCheckBox.isSelected() ? ADMIN : null).getHtml());
+		FileUtils.createFile(basePath, controllerText.getText(),
+				new Controller(config.getCompanyName(), projectText.getText(), moduleText.getText(),
+						analyzer.getModelName(), analyzer.getMappingName(), fieldList, analyzer.isContainEnable(),
+						containDate, containDecimal, analyzer.getTableComment(),
+						adminCheckBox.isSelected() ? ADMIN : null, htmlCheckBox.isSelected()).getHtml());
 	}
 
 	private void generateListFile(String basePath) {
 		if (htmlCheckBox.isSelected() && StringUtils.isNotBlank(this.listText.getText())) {
 			List<DummyField> allList = analyzer.getFieldList();
-			Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
+			List<String> excludeFieldList = Arrays.asList(ObjectTypeEnum.getFields(extendsBox.getSelectedItem()));
 			List<DummyField> fieldList = new ArrayList<>();
 			for (DummyField dumField : allList) {
-				if (excludeFieldSet.contains(dumField.getFieldName())) {
+				if (excludeFieldList.contains(dumField.getFieldName())) {
 					continue;
 				}
 				fieldList.add(dumField);
@@ -211,10 +212,10 @@ public class Generator extends BaseFrame {
 	private void generateEditFile(String basePath) {
 		if (htmlCheckBox.isSelected() && StringUtils.isNotBlank(this.editText.getText())) {
 			List<DummyField> allList = analyzer.getFieldList();
-			Set<String> excludeFieldSet = persistentMap.get(extendsBox.getSelectedItem());
+			List<String> excludeFieldList = Arrays.asList(ObjectTypeEnum.getFields(extendsBox.getSelectedItem()));
 			List<DummyField> fieldList = new ArrayList<>();
 			for (DummyField dumField : allList) {
-				if (excludeFieldSet.contains(dumField.getFieldName())) {
+				if (excludeFieldList.contains(dumField.getFieldName())) {
 					continue;
 				}
 				fieldList.add(dumField);

@@ -19,7 +19,7 @@ public class Controller {
 	private Map<String, Object> dataMap;
 
     public Controller(String company, String project, String module, String model, String mapping, List<DummyField> fieldList,
-        boolean containEnable, boolean containDate, boolean containDecimal, String tableComment, String admin) {
+        boolean containEnable, boolean containDate, boolean containDecimal, String tableComment, String admin, boolean containWeb) {
 		dataMap = new HashMap<>();
 		/** 公司 **/
 		dataMap.put("company", company);
@@ -47,6 +47,8 @@ public class Controller {
 		/** 后台管理页 **/
 		if (StringUtils.isNotBlank(admin))
 			dataMap.put("admin", admin);
+		/** 是否包含web页 **/
+		dataMap.put("containWeb", containWeb);
 	}
 
 	public String getHtml() {

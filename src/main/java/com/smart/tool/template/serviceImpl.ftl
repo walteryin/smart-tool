@@ -13,7 +13,7 @@ import com.${company!''}.${project!''}.service<#if module??>.${module}</#if>.${m
 import com.smart.mvc.service.impl.ServiceImpl;
 
 @Component("${_model}Service")
-public class ${model}ServiceImpl extends ServiceImpl<${model}Dao, ${model}> implements ${model}Service {
+public class ${model}ServiceImpl extends ${serviceImplName}<${model}Dao, ${model}> implements ${model}Service {
 <#if containEnable>
 
 	@Transactional
