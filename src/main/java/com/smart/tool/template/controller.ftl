@@ -30,7 +30,7 @@ import com.smart.mvc.validator.annotation.ValidateParam;
 
 @Api(tags = "${tableComment}")
 @Controller
-@RequestMapping("<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${mapping}")
+@RequestMapping("<#if admin??>/${admin}</#if><#if module??>/${module}</#if>/${_model}")
 @SuppressWarnings("rawtypes")
 public class ${model}Controller extends BaseController {
 
