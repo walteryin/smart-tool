@@ -5,9 +5,9 @@ import java.util.List;
 </#if>
 
 import com.${company!''}.${project!''}.model<#if module??>.${module}</#if>.${model};
-import com.smart.mvc.service.Service;
+import com.smart.mvc.service.BaseService;
 
-public interface ${model}Service extends Service<${model}> {
+public interface ${model}Service extends BaseService<${model}> {
 <#if containEnable>
 
 	void enable(Integer isEnable, List<Integer> idList);
