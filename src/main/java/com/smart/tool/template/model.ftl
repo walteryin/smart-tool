@@ -2,6 +2,7 @@ package com.${company!''}.${project!''}.model<#if module??>.${module}</#if>;
 
 <#if containDecimal>
 import java.math.BigDecimal;
+import com.alibaba.fastjson.serializer.ToStringSerializer;
 </#if>
 <#if containDate>
 import java.util.Date;
@@ -26,6 +27,9 @@ public class ${model} extends ${extendsProject} {
 	  	</#if>
 		<#if field.fieldType == "Date">
 	@JSONField(format = "${field.format}")
+	  	</#if>
+		<#if field.fieldType == "BigDecimal">
+	@JSONField(serializeUsing = ToStringSerializer.class)
 	  	</#if>
 	private ${field.fieldType} ${field.fieldName}<#if field.defaultValue??><#if field.fieldType == "Boolean"> = <#if field.defaultValue == "0">Boolean.FALSE<#else>Boolean.TRUE</#if><#elseif field.fieldType == "Integer"> = Integer.valueOf(${field.defaultValue})<#elseif field.fieldType == "Double"> = ${field.defaultValue}D<#else> = ${field.defaultValue}</#if></#if>;
 	</#list>
