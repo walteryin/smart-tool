@@ -33,7 +33,6 @@ public class ${model} extends ${extendsProject} {
 	  	</#if>
 	private ${field.fieldType} ${field.fieldName}<#if field.defaultValue??><#if field.fieldType == "Boolean"> = <#if field.defaultValue == "0">Boolean.FALSE<#else>Boolean.TRUE</#if><#elseif field.fieldType == "Integer"> = Integer.valueOf(${field.defaultValue})<#elseif field.fieldType == "Double"> = ${field.defaultValue}D<#else> = ${field.defaultValue}</#if></#if>;
 	</#list>
-	
 	<#list fieldList as field>
 	
 	public ${field.fieldType} get${field.upperFieldName}() {
