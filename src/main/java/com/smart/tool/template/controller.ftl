@@ -79,7 +79,7 @@ public class ${model}Controller extends BaseController {
 
 	@ApiOperation("保存")
 	@ResponseBody
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save")
 	public Result save(
 			@ValidateParam(name = "id") Integer id,
 		<#list fieldList as field>
@@ -114,7 +114,7 @@ public class ${model}Controller extends BaseController {
 
 	@ApiOperation("删除")
 	@ResponseBody
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete")
 	public Result delete(
 			@ValidateParam(name = "ids", value = { Validator.NOT_BLANK }) String ids) {
 		${_model}Service.deleteByIds(convertToIdList(ids));

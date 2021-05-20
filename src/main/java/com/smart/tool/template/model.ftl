@@ -1,11 +1,13 @@
 package com.${company!''}.${project!''}.model<#if module??>.${module}</#if>;
 
+<#if containDate>
+import java.util.Date;
+</#if>
 <#if containDecimal>
 import java.math.BigDecimal;
 import com.alibaba.fastjson.serializer.ToStringSerializer;
 </#if>
-<#if containDate>
-import java.util.Date;
+<#if containDate || containDecimal>
 import com.alibaba.fastjson.annotation.JSONField;
 </#if>
 import javax.persistence.Table;
