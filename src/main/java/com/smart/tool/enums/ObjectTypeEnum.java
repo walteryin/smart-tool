@@ -11,9 +11,9 @@ import java.util.stream.Stream;
  * @author Joe
  */
 public enum ObjectTypeEnum {
-	PERSISTENT_OBJECT("PersistentObject", "BaseServiceImpl", new String[] { "id" }), 
-	SIMPLE_PERSISTENT_OBJECT("SimplePersistentObject", "SimpleServiceImpl", new String[] { "id", "createBy", "createDate", "updateBy", "updateDate" }),
-	DELETE_FLAG_PERSISTENT_OBJECT("DeleteFlagPersistentObject", "DeleteFlagServiceImpl", new String[] { "id", "createBy", "createDate", "updateBy", "updateDate", "deleteFlag" });
+	PERSISTENT("BasePersistent", "BaseServiceImpl", new String[] { "id" }), 
+	STANDARD_PERSISTENT("StandardPersistent", "StandardServiceImpl", new String[] { "id", "createDate", "updateDate" }),
+	DELETE_FLAG_PERSISTENT("DeleteFlagPersistent", "DeleteFlagServiceImpl", new String[] { "id", "createDate", "updateDate", "deleteFlag" });
 
 	private Object name;
 	private String serviceImplName;
