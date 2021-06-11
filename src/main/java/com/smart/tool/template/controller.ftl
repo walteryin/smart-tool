@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.${company!''}.${project!''}.model<#if module??>.${module}</#if>.${model};
 import com.${company!''}.${project!''}.service<#if module??>.${module}</#if>.${model}Service;
-import com.smart.mvc.controller.BaseController;
-import com.smart.mvc.model.Result;
-import com.smart.mvc.model.Page;
-import com.smart.mvc.validator.Validator;
-import com.smart.mvc.validator.annotation.ValidateParam;
+import com.smart.core.controller.BaseController;
+import com.smart.core.model.Result;
+import com.smart.core.model.Page;
+import com.smart.core.validator.Validator;
+import com.smart.core.validator.annotation.ValidateParam;
 
 @Api(tags = "${tableComment}")
 @Controller

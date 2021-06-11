@@ -11,7 +11,7 @@ import com.alibaba.fastjson.serializer.ToStringSerializer;
 import com.alibaba.fastjson.annotation.JSONField;
 </#if>
 import javax.persistence.Table;
-import com.smart.mvc.model.${extendsProject};
+import com.smart.core.model.${extendsProject};
 
 <#if tableComment??>
 /**

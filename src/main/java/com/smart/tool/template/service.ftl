@@ -5,7 +5,7 @@ import java.util.List;
 </#if>
 
 import com.${company!''}.${project!''}.model<#if module??>.${module}</#if>.${model};
-import com.smart.mvc.service.BaseService;
+import com.smart.core.service.BaseService;
 
 public interface ${model}Service extends BaseService<${model}> {
 <#if containEnable>

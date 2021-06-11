@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.${company!''}.${project!''}.model<#if module??>.${module}</#if>.${model};
 import com.${company!''}.${project!''}.dao<#if module??>.${module}</#if>.${model}Dao;
 import com.${company!''}.${project!''}.service<#if module??>.${module}</#if>.${model}Service;
-import com.smart.mvc.service.impl.${serviceImplName};
+import com.smart.core.service.impl.${serviceImplName};
 
 @Component("${_model}Service")
 public class ${model}ServiceImpl extends ${serviceImplName}<${model}Dao, ${model}> implements ${model}Service {
