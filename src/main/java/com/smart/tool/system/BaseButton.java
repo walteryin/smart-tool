@@ -35,11 +35,13 @@ public class BaseButton extends JButton {
 		setContentAreaFilled(false);
 		setForeground(BUTTON_FOREGROUND_COLOR);
 		addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseEntered(MouseEvent e) {
 				BaseButton.this.hover = true;
 				BaseButton.this.repaint();
 			}
 
+			@Override
 			public void mouseExited(MouseEvent e) {
 				BaseButton.this.hover = false;
 				BaseButton.this.repaint();
@@ -47,6 +49,7 @@ public class BaseButton extends JButton {
 		});
 	}
 
+	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
 		int h = getHeight();

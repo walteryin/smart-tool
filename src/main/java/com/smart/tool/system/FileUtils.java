@@ -29,8 +29,9 @@ public class FileUtils {
 				return f;
 			}
 			else {
-				if (!f.exists())
+				if (!f.exists()) {
 					f.mkdir();
+				}
 			}
 		}
 		return null;

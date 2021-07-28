@@ -36,6 +36,7 @@ public class Generator extends BaseFrame {
 		editor.setVisible(true);
 	}
 
+	@Override
 	protected void changeTextValue() {
 	    String moduleString = (StringUtils.isNotBlank(moduleText.getText()) ?  "/" + moduleText.getText() : "");
 		this.modelText.setText(getPackageName() + "model" + moduleString

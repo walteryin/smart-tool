@@ -155,6 +155,7 @@ public abstract class BaseFrame extends JFrame {
 		this.outFileButton.setText("点击选择文件");
 		this.outFileButton.setBounds(520, 40, 100, 20);
 		this.outFileButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectOutFile(e);
 			}
@@ -242,7 +243,8 @@ public abstract class BaseFrame extends JFrame {
 		this.adminCheckBox.setSelected(true);
 		this.adminCheckBox.addItemListener(new ItemListener() {
             JCheckBox checkBox;
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
 				checkBox = (JCheckBox) e.getSource();
 				if (checkBox.isSelected()) {
 					changeTextValue();
@@ -258,7 +260,8 @@ public abstract class BaseFrame extends JFrame {
 		this.htmlCheckBox.setSelected(false);
 		this.htmlCheckBox.addItemListener(new ItemListener() {
             JCheckBox checkBox;
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
 				checkBox = (JCheckBox) e.getSource();
 				if (checkBox.isSelected()) {
 					changeTextValue();
@@ -292,6 +295,7 @@ public abstract class BaseFrame extends JFrame {
 		this.generateButton.setToolTipText("生成");
 		this.generateButton.setBounds(new Rectangle(280, 350, 80, 25));
 		this.generateButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				generateEvent(e);
 			}
@@ -369,24 +373,30 @@ public abstract class BaseFrame extends JFrame {
 		private AddKeyHandler() {
 		}
 
+		@Override
 		public void keyPressed(KeyEvent e) {
 		}
 
+		@Override
 		public void keyReleased(KeyEvent e) {
 			changeTextValue();
 		}
 
+		@Override
 		public void keyTyped(KeyEvent e) {
 		}
 	}
 
 	private class CloseHandler extends WindowAdapter {
+		@Override
 		public void windowClosing(WindowEvent event) {
 			try {
-				if (statement != null)
+				if (statement != null) {
 					statement.close();
-				if (connection != null)
+				}
+				if (connection != null) {
 					connection.close();
+				}
 			}
 			catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "数据库连接关闭失败!");

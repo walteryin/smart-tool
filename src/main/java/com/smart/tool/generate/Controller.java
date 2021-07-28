@@ -26,8 +26,9 @@ public class Controller {
 		/** 项目 **/
 		dataMap.put("project", project);
 		/** 模块 **/
-		if (StringUtils.isNotBlank(module))
+		if (StringUtils.isNotBlank(module)) {
 			dataMap.put("module", module);
+		}
 		/** 模型 **/
 		dataMap.put("model", model);
 		/** 小写开头模型 **/
@@ -45,8 +46,9 @@ public class Controller {
 		/** 表描述 **/
 		dataMap.put("tableComment", tableComment);
 		/** 后台管理页 **/
-		if (StringUtils.isNotBlank(admin))
+		if (StringUtils.isNotBlank(admin)) {
 			dataMap.put("admin", admin);
+		}
 		/** 是否包含web页 **/
 		dataMap.put("containWeb", containWeb);
 	}
